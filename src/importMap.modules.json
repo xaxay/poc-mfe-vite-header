@@ -1,8 +1,8 @@
 {
   "imports": {
-    "@browser-module/stores/counter": "http://localhost:5001/poc-mfe-vite/src/stores/counterStore.ts",
-    "@browser-module/api/user": "http://localhost:5001/poc-mfe-vite/src/api/user.ts",
-    "@browser-module/api/nav": "http://localhost:5001/poc-mfe-vite/src/api/nav.ts",
+    "@browser-module/stores/counter": "https://xaxay.github.io/poc-mfe-vite-root/src/stores/counterStore.ts",
+    "@browser-module/api/user": "https://xaxay.github.io/poc-mfe-vite-root/src/api/user.ts",
+    "@browser-module/api/nav": "https://xaxay.github.io/poc-mfe-vite-root/src/api/nav.ts",
 
     "@browser-module/ui/header": "/src/components/Header.vue"
   }
