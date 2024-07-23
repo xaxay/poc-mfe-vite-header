@@ -1,8 +1,8 @@
 {
-  "base": "/poc-mfe-vite-root/",
+  "base": "/poc-mfe-vite-header/",
   "plugins": [
     {
-      "name": "vite:build-metadata"
+      "name": "vite:optimized-deps"
     },
     {
       "name": "vite:watch-package-data"
@@ -191,7 +191,7 @@
             }
           },
           "root": "/home/mpopel/lab/poc-mfe-vite-header",
-          "sourceMap": false,
+          "sourceMap": true,
           "cssDevSourcemap": false,
           "devToolsEnabled": false
         },
@@ -223,23 +223,10 @@
       "name": "vite:css-post"
     },
     {
-      "name": "vite:build-html"
-    },
-    {
       "name": "vite:worker-import-meta-url"
     },
     {
       "name": "vite:asset-import-meta-url"
-    },
-    {
-      "name": "vite:force-systemjs-wrap-complete"
-    },
-    {
-      "name": "commonjs",
-      "version": "26.0.1"
-    },
-    {
-      "name": "vite:data-uri"
     },
     {
       "name": "vite:dynamic-import-vars"
@@ -248,19 +235,13 @@
       "name": "vite:import-glob"
     },
     {
-      "name": "vite:build-import-analysis"
+      "name": "vite:client-inject"
     },
     {
-      "name": "vite:esbuild-transpile"
+      "name": "vite:css-analysis"
     },
     {
-      "name": "vite:terser"
-    },
-    {
-      "name": "vite:reporter"
-    },
-    {
-      "name": "vite:load-fallback"
+      "name": "vite:import-analysis"
     }
   ],
   "define": {
@@ -333,15 +314,15 @@
       },
       {
         "find": "@browser-module/stores/counter",
-        "replacement": "https://xaxay.github.io/poc-mfe-vite-root/src/stores/counterStore.ts"
+        "replacement": "https:///poc-mfe-vite-root/src/stores/counterStore.ts"
       },
       {
         "find": "@browser-module/api/user",
-        "replacement": "https://xaxay.github.io/poc-mfe-vite-root/src/api/user.ts"
+        "replacement": "https:///poc-mfe-vite-root/src/api/user.ts"
       },
       {
         "find": "@browser-module/api/nav",
-        "replacement": "https://xaxay.github.io/poc-mfe-vite-root/src/api/nav.ts"
+        "replacement": "https:///poc-mfe-vite-root/src/api/nav.ts"
       },
       {
         "find": "@browser-module/ui/header",
@@ -444,13 +425,14 @@
     "/home/mpopel/lab/poc-mfe-vite-header/vite.config.mts"
   ],
   "inlineConfig": {
-    "build": {}
+    "build": {},
+    "preview": {}
   },
   "root": "/home/mpopel/lab/poc-mfe-vite-header",
-  "rawBase": "/poc-mfe-vite-root/",
+  "rawBase": "/poc-mfe-vite-header/",
   "publicDir": "/home/mpopel/lab/poc-mfe-vite-header/public",
   "cacheDir": "/home/mpopel/lab/poc-mfe-vite-header/node_modules/.vite",
-  "command": "build",
+  "command": "serve",
   "mode": "production",
   "isWorker": false,
   "mainConfig": null,
@@ -462,7 +444,7 @@
   },
   "envDir": "/home/mpopel/lab/poc-mfe-vite-header",
   "env": {
-    "BASE_URL": "/poc-mfe-vite-root/",
+    "BASE_URL": "/poc-mfe-vite-header/",
     "MODE": "production",
     "DEV": false,
     "PROD": true
