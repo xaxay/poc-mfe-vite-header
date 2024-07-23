@@ -1,4 +1,4 @@
-# [Phase-2] Distributed Pure Single Page Application (SPA): Proof of Concept
+# [Phase-3] Distributed rich Single Page Application (SPA): Proof of Concept
 
 ## Introduction
 
@@ -8,9 +8,16 @@ It is full-fledged development version that is bases on
 
 Vite / ImportMaps / HTML / JS / CSS / Vue3 / Vuetify3 / Pinia.
 
+It is distributed on few repositories:
+
+* [poc-mfe-vite-root](https://github.com/xaxay/poc-mfe-vite-root) 
+* [poc-mfe-vite-header](https://github.com/xaxay/poc-mfe-vite-header) 
+* [poc-mfe-vite-dashboard](https://github.com/xaxay/poc-mfe-vite-dashboard) 
+* [poc-mfe-vite-admin](https://github.com/xaxay/poc-mfe-vite-admin) 
+
 # Demo
 
-[Click to see Demo](https://xaxay.github.io/poc-mfe-vite/)
+[Click to see Demo](https://xaxay.github.io/poc-mfe-vite-root/)
 
 It proves that it works and demonstrate how all these parts are initialized and interacted together from different in-browser modules!
 
