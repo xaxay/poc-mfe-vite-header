@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@browser-module/stores/counter": "https://@/mock/counter.js",
+    "@browser-module/api/user": "https://@/mock/user.js",
+    "@browser-module/api/nav": "https://@/mock/nav.js",
+
+    "@browser-module/ui/header": "/src/components/Header.vue"
+  }
+}

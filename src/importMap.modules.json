@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "@browser-module/stores/counter": "https:///poc-mfe-vite-root/src/stores/counterStore.ts",
-    "@browser-module/api/user": "https:///poc-mfe-vite-root/src/api/user.ts",
-    "@browser-module/api/nav": "https:///poc-mfe-vite-root/src/api/nav.ts",
-
-    "@browser-module/ui/header": "/src/components/Header.vue"
-  }
-}

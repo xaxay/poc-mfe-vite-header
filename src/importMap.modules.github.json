@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "@browser-module/stores/counter": "https://xaxay.github.io/poc-mfe-vite-root/src/stores/counterStore.ts",
-    "@browser-module/api/user": "https://xaxay.github.io/poc-mfe-vite-root/src/api/user.ts",
-    "@browser-module/api/nav": "https://xaxay.github.io/poc-mfe-vite-root/src/api/nav.ts",
-
-    "@browser-module/ui/header": "/src/components/Header.vue"
-  }
-}

@@ -3,12 +3,17 @@ import { existsSync, readFileSync } from 'fs';
 import { ConfigEnv, Plugin } from 'vite';
 import { fileURLToPath, URL } from 'node:url';
 import externalize from 'vite-plugin-externalize-dependencies';
-import { resolve, basename, join } from 'path';
+import { resolve, basename, join as joinOrig } from 'path';
 import chalk from 'chalk';
 import { NormalizedOutputOptions, OutputBundle, PreRenderedAsset, PreRenderedChunk } from 'rollup';
-import baseUrl from './src/config/baseUrl';
 // console.log('[vite-plugin-import-maps] baseUrl:', baseUrl);
 
+let baseUrl = undefined;
+
+
+function join(...paths: string[]): string {
+  return joinOrig(...paths).replaceAll('\\', '/');
+}
 
 export interface ImportMapsConfig {
   entryTemplate: string;
@@ -16,7 +21,7 @@ export interface ImportMapsConfig {
   chunckTemplate: string;
   importMaps: {
     type?: string;
-    modules?: string;
+    modules?: string[];
     dev?: string[];
     build?: string[];
   };
@@ -29,16 +34,12 @@ export interface ImportMap {
 
 function loadImportMapFiles(devMode: boolean, config: ImportMapsConfig): ImportMap[] {
 
-  const devImportMapFiles = config.importMaps.dev;
-  const buildImportMapFiles = config.importMaps.build;
-  const importMapFiles: string[] = devMode 
-    ? [...devImportMapFiles]
-    : [...buildImportMapFiles];
-
-  const modulesImportMapFile = config.importMaps.modules;
-  if (modulesImportMapFile) {
-    importMapFiles.push(modulesImportMapFile);
-  }
+  const devImportMapFiles: string[] = config.importMaps.dev;
+  const buildImportMapFiles: string[] = config.importMaps.build;
+  const modulesImportMapFile: string[] = config.importMaps.modules;
+  let importMapFiles: string[] = devMode 
+    ? [...devImportMapFiles, ...modulesImportMapFile]
+    : [...buildImportMapFiles, ...modulesImportMapFile];
 
   console.log(`[vite-plugin-import-maps] baseUrl:${baseUrl} import-map-files:${importMapFiles} devMode:${devMode}`);
 
@@ -77,9 +78,9 @@ const printedModules = new Set<string>();
 
 export const defaultImportMapsConfig : ImportMapsConfig = {
   importMaps: {
-    modules: 'src/importMap.modules.json',
-    dev: ['src/importMap.dev.json'],
-    build: ['src/importMap.build.json'],
+    modules: ['config/importMap.modules.json'],
+    dev: ['config/importMap.dev.json'],
+    build: ['config/importMap.build.json'],
     type: 'importmap',
   },
   entryTemplate: '[name]-[hash].[ext]',
@@ -127,6 +128,12 @@ export function ImportMapsPlugin(pluginConfig: ImportMapsConfig = defaultImportM
 
     Object.entries(importMap.imports).forEach(([k, v]) => {
       if (v.startsWith('http://') || v.startsWith('https://')) {
+        if (v.startsWith('http://@/')) {
+          importMap.imports[k] = v.replace('http://@/', '/');
+        }
+        else if (v.startsWith('https://@/')) {
+          importMap.imports[k] = v.replace('https://@/', '/');
+        }
         return;
       }
       inputs[k] = v;
@@ -170,6 +177,7 @@ export function ImportMapsPlugin(pluginConfig: ImportMapsConfig = defaultImportM
 
     config(config: any, env: ConfigEnv) {
       devMode = env.command === 'serve';
+      baseUrl = config.base;
 
       updateImportMaps();
 
